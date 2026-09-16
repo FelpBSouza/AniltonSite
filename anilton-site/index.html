@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anilton Batista — Fotografia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <svg viewBox="0 0 120 120"><path id="b" d="M113.8,38.25 L113.8,81.75 L74.86,73.38 L79.98,59.3 Z"/>
+      <use href="#b" fill="#FF6B35" transform="rotate(0 60 60)"/>
+      <use href="#b" fill="#29C5C9" transform="rotate(60 60 60)"/>
+      <use href="#b" fill="#F4C430" transform="rotate(120 60 60)"/>
+      <use href="#b" fill="#FF6B35" transform="rotate(180 60 60)"/>
+      <use href="#b" fill="#29C5C9" transform="rotate(240 60 60)"/>
+      <use href="#b" fill="#F4C430" transform="rotate(300 60 60)"/>
+      <circle cx="60" cy="60" r="17" fill="#0B1620"/>
+    </svg>
+    <span>ANILTON BATISTA</span>
+  </div>
+  <div class="nav-links">
+    <a href="#albuns">Álbuns</a>
+    <a href="#sobre">Sobre</a>
+    <a href="loja.html">Loja</a>
+    <a href="#contato" class="nav-cta">Contratar</a>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Ativar tema claro" aria-pressed="false">
+      <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
+      <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5 8.5 8.5 0 1 0 20.5 14.5Z"></path></svg>
+    </button>
+  </div>
+</nav>
+
+<div class="hero">
+  <img src="img/Anilton1.jpg" alt="Cobertura esportiva">
+  <div class="hero-inner">
+    <h1>Registrando<br>cada <span class="c1">virada</span>.</h1>
+    <div class="hero-meta">Parnaíba, PI<br>Corridas · Futebol · Vôlei · Turismo</div>
+  </div>
+</div>
+
+<div class="filter-bar" id="filterBar">
+  <button class="active" data-filter="todos">Todos</button>
+  <button data-filter="corrida">Corridas</button>
+  <button data-filter="futebol">Futebol</button>
+  <button data-filter="volei">Vôlei</button>
+  <button data-filter="turismo">Turismo</button>
+</div>
+
+<section id="albuns">
+  <div class="section-head">
+    <h2>Álbuns recentes</h2>
+    <span>Coberturas dos últimos meses em Parnaíba e região</span>
+  </div>
+  <div class="carousel-wrap">
+    <button class="carousel-arrow carousel-prev" id="prevBtn" aria-label="Anterior">←</button>
+    <button class="carousel-arrow carousel-next" id="nextBtn" aria-label="Próximo">→</button>
+    <div class="album-grid" id="albumGrid">
+    <div class="album-card" data-category="turismo">
+      <div class="album-photo">
+        <img src="img/portodasbarcas.png" alt="">
+        <span class="album-tag tag-turismo">Passeio</span>
+      </div>
+      <div class="album-info">
+        <h3>Porto das Barcas</h3>
+        <div class="album-loc">📍 Porto das Barcas, Parnaíba - PI</div>
+        <div class="album-date">13/09/2026</div>
+      </div>
+    </div>
+    <div class="album-card" data-category="corrida">
+      <div class="album-photo">
+        <img src="img/Setembro-Amarelo.png" alt="">
+        <span class="album-tag tag-corrida">Corrida</span>
+      </div>
+      <div class="album-info">
+        <h3>5º Edição Treinão Setembro Amarelo</h3>
+        <div class="album-loc">📍 Parnaíba, PI</div>
+        <div class="album-date">12/09/2026</div>
+      </div>
+    </div>
+    <div class="album-card" data-category="volei">
+      <div class="album-photo">
+        <img src="img/Oligarquia.png" alt="">
+        <span class="album-tag tag-volei">Vôlei</span>
+      </div>
+      <div class="album-info">
+        <h3>Oligarquia — UFDPar</h3>
+        <div class="album-loc">📍 Universidade Federal do Delta do Parnaíba</div>
+        <div class="album-date">11/09/2026</div>
+      </div>
+    </div>
+    <div class="album-card" data-category="futebol">
+      <div class="album-photo">
+        <img src="img/torcida.png" alt="">
+        <span class="album-tag tag-futebol">Futebol</span>
+      </div>
+      <div class="album-info">
+        <h3>Torcida — Arena São Raimundo</h3>
+        <div class="album-loc">📍 Buriti dos Lopes, PI</div>
+        <div class="album-date">07/09/2026</div>
+      </div>
+    </div>
+    <div class="album-card" data-category="corrida">
+      <div class="album-photo">
+        <img src="img/França.png" alt="">
+        <span class="album-tag tag-viagem">Viagem</span>
+      </div>
+      <div class="album-info">
+        <h3>França</h3>
+        <div class="album-loc">📍 Paris</div>
+        <div class="album-date">10/12/2025</div>
+      </div>
+    </div>
+    <div class="album-card" data-category="volei">
+      <div class="album-photo">
+        <img src="https://picsum.photos/id/1049/500/375" alt="">
+        <span class="album-tag tag-volei">Vôlei</span>
+      </div>
+      <div class="album-info">
+        <h3>Vôlei de Praia — Torneio Regional</h3>
+        <div class="album-loc">📍 Praia do Coqueiro, PI</div>
+        <div class="album-date">24/08/2026</div>
+      </div>
+    </div>
+    <div class="album-card" data-category="futebol">
+      <div class="album-photo">
+        <img src="https://picsum.photos/id/1067/500/375" alt="">
+        <span class="album-tag tag-futebol">Futebol</span>
+      </div>
+      <div class="album-info">
+        <h3>Final do Campeonato Municipal</h3>
+        <div class="album-loc">📍 Estádio Municipal, Parnaíba - PI</div>
+        <div class="album-date">18/08/2026</div>
+      </div>
+    </div>
+    <div class="album-card" data-category="turismo">
+      <div class="album-photo">
+        <img src="https://picsum.photos/id/1036/500/375" alt="">
+        <span class="album-tag tag-turismo">Passeio</span>
+      </div>
+      <div class="album-info">
+        <h3>Delta do Parnaíba</h3>
+        <div class="album-loc">📍 Ilha Grande de Santa Isabel, PI</div>
+        <div class="album-date">10/08/2026</div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <p class="empty-state" id="emptyState">Nenhum álbum nessa categoria ainda.</p>
+
+<div class="about" id="sobre">
+  <div class="about-photo">
+    <img src="img/Aniltonsobre.jpg" alt="Anilton Batista">
+  </div>
+  <div class="about-text">
+    <h2>Cobrindo o esporte e os eventos de Parnaíba de perto.</h2>
+    <p>Fotografo corridas, jogos e treinos há anos — sempre no meio da ação, pra pegar o momento que ninguém mais viu. Também levo essa mesma atenção pra viagens e turismo.</p>
+    <div class="about-stats">
+      <div><strong>200+</strong><span>eventos cobertos</span></div>
+      <div><strong>4</strong><span>países fotografados</span></div>
+      <div><strong>9</strong><span>anos de estrada</span></div>
+    </div>
+  </div>
+</div>
+
+<section id="contato">
+  <div class="contact">
+    <h2>Precisa de cobertura pro seu evento?</h2>
+    <div class="contact-links">
+      <a href="https://wa.me/5586900000000">WhatsApp</a>
+      <a href="#">Instagram</a>
+      <a href="mailto:contato@aniltonbatista.com">contato@aniltonbatista.com</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Anilton Batista, fotografia</span>
+  <span>Parnaíba, PI</span>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
