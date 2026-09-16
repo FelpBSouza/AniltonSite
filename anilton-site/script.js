@@ -59,6 +59,8 @@
   const storePage = document.getElementById('storePage');
   if (storePage) {
     const accountButton = document.getElementById('accountButton');
+    const accountAvatar = accountButton.querySelector('.account-avatar');
+    const accountLabel = accountButton.querySelector('.account-label');
     const cartButton = document.getElementById('cartButton');
     const cartCount = document.getElementById('cartCount');
     const authModal = document.getElementById('authModal');
@@ -96,7 +98,12 @@
     };
 
     const updateAccountButton = (user = getUser()) => {
-      accountButton.textContent = user ? 'Sair' : 'Entrar';
+      accountLabel.textContent = user ? 'Sair' : 'Entrar';
+      accountAvatar.textContent = user ? '' : '◯';
+      accountAvatar.style.backgroundImage = user?.user_metadata?.avatar_url
+        ? `url("${user.user_metadata.avatar_url}")`
+        : '';
+      accountAvatar.classList.toggle('has-image', Boolean(user?.user_metadata?.avatar_url));
       accountButton.setAttribute('aria-label', user ? `Sair de ${user.email}` : 'Entrar ou criar conta');
     };
 

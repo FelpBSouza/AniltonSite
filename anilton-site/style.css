@@ -175,7 +175,9 @@
   .buy-button, .account-button, .cart-button { border: 1px solid var(--line); background: transparent; color: var(--text); cursor: pointer; font: inherit; }
   .buy-button { padding: 8px 12px; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; }
   .buy-button:hover, .account-button:hover, .cart-button:hover { border-color: var(--orange); color: var(--orange); }
-  .account-button { padding: 8px 12px; font-size: 0.8rem; }
+  .account-button { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; font-size: 0.8rem; }
+  .account-avatar { width: 22px; height: 22px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; background-color: var(--surface); background-position: center; background-size: cover; color: var(--muted); font-size: 0.9rem; line-height: 1; }
+  .account-avatar.has-image { border-color: var(--cyan); color: transparent; }
   .cart-button { display: inline-flex; align-items: center; gap: 8px; padding: 8px 10px; font-size: 0.8rem; }
   .cart-button b { min-width: 20px; height: 20px; display: grid; place-items: center; background: var(--yellow); color: #0B1620; border-radius: 50%; font-size: 0.7rem; }
   .modal-backdrop { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 20px; background: rgba(11,22,32,0.72); }
