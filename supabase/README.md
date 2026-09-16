@@ -34,3 +34,9 @@ Troque o e-mail pelo e-mail real da conta. Execute esse comando somente no SQL E
 ## Carrinho
 
 O carrinho usa `orders` e `order_items` no Supabase. O preço é definido pelo trigger do banco, não pelo navegador. A confirmação Pix deverá ser manual no início ou feita por uma Edge Function/webhook depois.
+
+## Sanity
+
+O arquivo `anilton-site/sanity-config.js` contém apenas a configuração pública de leitura. Depois de criar o projeto no Sanity, substitua `COLE_AQUI_O_PROJECT_ID` pelo ID do projeto. Nunca coloque token de escrita no frontend.
+
+O schema inicial está em `sanity/schema.js`. Use-o no Sanity Studio para criar álbuns publicados, capas e prévias. Configure o domínio publicado em **Manage > API > CORS origins** antes de testar a leitura pelo site.
