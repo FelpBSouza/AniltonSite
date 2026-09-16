@@ -1,6 +1,5 @@
 export function initHome() {
   const buttons = document.querySelectorAll('#filterBar button');
-  const cards = document.querySelectorAll('#albumGrid .album-card');
   const emptyState = document.getElementById('emptyState');
 
   buttons.forEach(button => {
@@ -9,6 +8,7 @@ export function initHome() {
       button.classList.add('active');
 
       const filter = button.dataset.filter;
+      const cards = document.querySelectorAll('#albumGrid .album-card');
       let visibleCount = 0;
       cards.forEach(card => {
         const matches = filter === 'todos' || card.dataset.category === filter;
