@@ -32,10 +32,11 @@ export function initStore() {
   let authMode = 'login';
   let currentUser = null;
   let pendingProduct = null;
+  let currentOrderId = null;
+  let cart = [];
+  let catalog = [];
 
   const getUser = () => currentUser;
-  const getCart = () => JSON.parse(localStorage.getItem('aniltonCart') || '[]');
-  const saveCart = cart => localStorage.setItem('aniltonCart', JSON.stringify(cart));
   const formatPrice = value => value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
   const setMessage = (element, message, type = '') => {
@@ -79,7 +80,6 @@ export function initStore() {
   };
 
   const renderCart = () => {
-    const cart = getCart();
     cartCount.textContent = cart.length;
     cartItems.innerHTML = '';
     if (!cart.length) {
@@ -99,14 +99,64 @@ export function initStore() {
   };
 
   const addToCart = product => {
-    const cart = getCart();
-    if (!cart.some(item => item.id === product.id)) {
-      cart.push(product);
-      saveCart(cart);
+    if (cart.some(item => item.id === product.id)) {
+      renderCart();
+      openModal(cartModal);
+      return;
+    }
+    ensureOrder()
+      .then(() => supabaseClient.from('order_items').insert({ order_id: currentOrderId, photo_id: product.id }).select('id, photo_id, unit_price, photos(title)').single())
+      .then(({ data, error }) => {
+        if (error) throw error;
+        cart.push({ id: data.photo_id, itemId: data.id, title: data.photos.title, price: Number(data.unit_price) });
+        renderCart();
+        setMessage(cartMessage, 'Foto adicionada à sua sacola.', 'success');
+        openModal(cartModal);
+      })
+      .catch(error => setMessage(cartMessage, `Não foi possível adicionar: ${error.message}`, 'error'));
+  };
+
+  const ensureOrder = async () => {
+    if (currentOrderId) return currentOrderId;
+    const existing = await supabaseClient.from('orders').select('id').eq('user_id', currentUser.id).eq('status', 'pending').order('created_at', { ascending: false }).limit(1).maybeSingle();
+    if (existing.error) throw existing.error;
+    if (existing.data) {
+      currentOrderId = existing.data.id;
+      return currentOrderId;
+    }
+    const created = await supabaseClient.from('orders').insert({ user_id: currentUser.id, status: 'pending' }).select('id').single();
+    if (created.error) throw created.error;
+    currentOrderId = created.data.id;
+    return currentOrderId;
+  };
+
+  const loadCatalog = async () => {
+    if (!supabaseClient) return;
+    const result = await supabaseClient.from('photos').select('id, title, price').eq('is_published', true);
+    if (result.error) {
+      setMessage(cartMessage, 'Não foi possível carregar o catálogo do Supabase.', 'error');
+      return;
+    }
+    catalog = result.data;
+  };
+
+  const loadCart = async () => {
+    cart = [];
+    currentOrderId = null;
+    if (!currentUser || !supabaseClient) {
+      renderCart();
+      return;
+    }
+    const result = await supabaseClient.from('orders').select('id, order_items(id, photo_id, unit_price, photos(title))').eq('user_id', currentUser.id).eq('status', 'pending').order('created_at', { ascending: false }).limit(1).maybeSingle();
+    if (result.error) {
+      setMessage(cartMessage, 'Não foi possível carregar sua sacola.', 'error');
+      return;
+    }
+    if (result.data) {
+      currentOrderId = result.data.id;
+      cart = result.data.order_items.map(item => ({ id: item.photo_id, itemId: item.id, title: item.photos.title, price: Number(item.unit_price) }));
     }
     renderCart();
-    setMessage(cartMessage, 'Foto adicionada à sua sacola.', 'success');
-    openModal(cartModal);
   };
 
   const finishAuthentication = user => {
@@ -127,7 +177,7 @@ export function initStore() {
     authMessage.textContent = '';
   };
 
-  document.querySelectorAll('.store-card').forEach((card, index) => {
+  document.querySelectorAll('.store-card').forEach(card => {
     const title = card.querySelector('h3').textContent.trim();
     const price = 29.9;
     const purchase = document.createElement('div');
@@ -135,7 +185,12 @@ export function initStore() {
     purchase.innerHTML = `<span class="store-price">${formatPrice(price)}</span><button class="buy-button" type="button">Comprar foto</button>`;
     card.querySelector('.album-info').appendChild(purchase);
     purchase.querySelector('.buy-button').addEventListener('click', () => {
-      const product = { id: String(index), title, price };
+      const product = catalog.find(item => item.title === title);
+      if (!product) {
+        setMessage(cartMessage, 'Este produto ainda não foi cadastrado no catálogo.', 'error');
+        openModal(cartModal);
+        return;
+      }
       if (!getUser()) {
         pendingProduct = product;
         setMessage(authMessage, 'Entre ou crie uma conta para continuar.');
@@ -233,10 +288,17 @@ export function initStore() {
     finishAuthentication(result.data.user);
   });
 
-  cartItems.addEventListener('click', event => {
+  cartItems.addEventListener('click', async event => {
     const removeButton = event.target.closest('[data-remove-id]');
     if (!removeButton) return;
-    saveCart(getCart().filter(item => item.id !== removeButton.dataset.removeId));
+    const item = cart.find(cartItem => cartItem.id === removeButton.dataset.removeId);
+    if (!item) return;
+    const result = await supabaseClient.from('order_items').delete().eq('id', item.itemId);
+    if (result.error) {
+      setMessage(cartMessage, 'Não foi possível remover a foto.', 'error');
+      return;
+    }
+    cart = cart.filter(cartItem => cartItem.id !== item.id);
     renderCart();
   });
 
@@ -254,13 +316,16 @@ export function initStore() {
     supabaseClient.auth.onAuthStateChange((_event, session) => {
       currentUser = session?.user ?? null;
       updateAccountButton(currentUser);
+      loadCart();
     });
-    supabaseClient.auth.getSession().then(({ data }) => {
+    supabaseClient.auth.getSession().then(async ({ data }) => {
       currentUser = data.session?.user ?? null;
       updateAccountButton(currentUser);
+      await loadCatalog();
+      await loadCart();
     });
   } else {
     updateAccountButton(null);
+    loadCart();
   }
-  renderCart();
 }

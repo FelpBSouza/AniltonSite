@@ -5,9 +5,11 @@
 1. Crie um projeto no Supabase.
 2. Abra o SQL Editor.
 3. Execute o conteúdo de `schema.sql`.
-4. Em Authentication > Providers, ative Email.
-5. Crie uma conta normal pelo site.
-6. Promova essa conta a administradora no SQL Editor:
+4. Execute `catalog.sql` para cadastrar os produtos iniciais.
+5. Execute `cart.sql` para permitir remoção de itens do próprio carrinho.
+6. Em Authentication > Providers, ative Email.
+7. Crie uma conta normal pelo site.
+8. Promova essa conta a administradora no SQL Editor:
 
 ```sql
 update public.profiles
@@ -29,6 +31,6 @@ Troque o e-mail pelo e-mail real da conta. Execute esse comando somente no SQL E
 - Somente administradores podem alterar o status de pagamento.
 - Nunca marque pedidos como pagos a partir de uma ação do navegador.
 
-## Próxima integração
+## Carrinho
 
-O frontend deve usar Supabase Auth para login e as tabelas `orders` e `order_items` para o carrinho. A confirmação Pix deverá ser manual no início ou feita por uma Edge Function/webhook depois.
+O carrinho usa `orders` e `order_items` no Supabase. O preço é definido pelo trigger do banco, não pelo navegador. A confirmação Pix deverá ser manual no início ou feita por uma Edge Function/webhook depois.
