@@ -28,9 +28,8 @@
     <a href="index.html#sobre">Sobre</a>
     <a href="loja.html" aria-current="page">Loja</a>
     <a href="index.html#contato" class="nav-cta">Contratar</a>
-    <button class="account-button" id="accountButton" type="button">
+    <button class="account-button" id="accountButton" type="button" aria-label="Abrir conta" aria-haspopup="dialog">
       <span class="account-avatar" aria-hidden="true">◯</span>
-      <span class="account-label">Entrar</span>
     </button>
     <button class="cart-button" id="cartButton" type="button" aria-label="Abrir carrinho">
       <span aria-hidden="true">Sacola</span><b id="cartCount">0</b>
@@ -120,6 +119,26 @@
       <p class="form-message" id="authMessage" role="status"></p>
       <button class="form-submit" type="submit" id="authSubmit">Entrar</button>
     </form>
+  </section>
+</div>
+
+<div class="modal-backdrop" id="profileModal" hidden>
+  <section class="modal-panel profile-panel" role="dialog" aria-modal="true" aria-labelledby="profileTitle">
+    <button class="modal-close" type="button" data-close-modal="profileModal" aria-label="Fechar">×</button>
+    <div class="profile-heading">
+      <span class="profile-avatar account-avatar" id="profileAvatar" aria-hidden="true">◯</span>
+      <div>
+        <p class="modal-kicker">Minha conta</p>
+        <h2 id="profileTitle">Seu perfil</h2>
+      </div>
+    </div>
+    <nav class="profile-menu" aria-label="Opções da conta">
+      <button class="profile-menu-item active" type="button" data-profile-view="profile">Perfil</button>
+      <button class="profile-menu-item" type="button" data-profile-view="settings">Configurações</button>
+      <button class="profile-menu-item" type="button" data-profile-view="purchases">Minhas compras</button>
+    </nav>
+    <div class="profile-view" id="profileView"></div>
+    <button class="profile-logout" id="profileLogout" type="button">Sair da conta</button>
   </section>
 </div>
 

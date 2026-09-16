@@ -60,10 +60,13 @@
   if (storePage) {
     const accountButton = document.getElementById('accountButton');
     const accountAvatar = accountButton.querySelector('.account-avatar');
-    const accountLabel = accountButton.querySelector('.account-label');
     const cartButton = document.getElementById('cartButton');
     const cartCount = document.getElementById('cartCount');
     const authModal = document.getElementById('authModal');
+    const profileModal = document.getElementById('profileModal');
+    const profileAvatar = document.getElementById('profileAvatar');
+    const profileView = document.getElementById('profileView');
+    const profileLogout = document.getElementById('profileLogout');
     const cartModal = document.getElementById('cartModal');
     const authForm = document.getElementById('authForm');
     const authSubmit = document.getElementById('authSubmit');
@@ -98,13 +101,34 @@
     };
 
     const updateAccountButton = (user = getUser()) => {
-      accountLabel.textContent = user ? 'Sair' : 'Entrar';
       accountAvatar.textContent = user ? '' : '◯';
-      accountAvatar.style.backgroundImage = user?.user_metadata?.avatar_url
-        ? `url("${user.user_metadata.avatar_url}")`
+      const avatarUrl = user?.user_metadata?.avatar_url;
+      accountAvatar.style.backgroundImage = avatarUrl
+        ? `url(\"${avatarUrl}\")`
         : '';
-      accountAvatar.classList.toggle('has-image', Boolean(user?.user_metadata?.avatar_url));
-      accountButton.setAttribute('aria-label', user ? `Sair de ${user.email}` : 'Entrar ou criar conta');
+      accountAvatar.classList.toggle('has-image', Boolean(avatarUrl));
+      accountButton.setAttribute('aria-label', user ? `Abrir conta de ${user.email}` : 'Entrar ou criar conta');
+    };
+
+    const renderProfileAvatar = user => {
+      const avatarUrl = user?.user_metadata?.avatar_url;
+      profileAvatar.textContent = avatarUrl ? '' : '◯';
+      profileAvatar.style.backgroundImage = avatarUrl ? `url(\"${avatarUrl}\")` : '';
+      profileAvatar.classList.toggle('has-image', Boolean(avatarUrl));
+    };
+
+    const renderProfileView = view => {
+      document.querySelectorAll('[data-profile-view]').forEach(button => {
+        button.classList.toggle('active', button.dataset.profileView === view);
+      });
+      if (view === 'settings') {
+        profileView.innerHTML = '<strong>Configurações</strong><span>Preferências da conta e notificações estarão disponíveis aqui.</span>';
+      } else if (view === 'purchases') {
+        profileView.innerHTML = '<strong>Minhas compras</strong><span>Você ainda não tem compras confirmadas.</span>';
+      } else {
+        const email = currentUser?.email || 'Conta não conectada';
+        profileView.innerHTML = `<strong>${email}</strong><span>Conta protegida pelo Supabase Auth.</span>`;
+      }
     };
 
     const finishAuthentication = user => {
@@ -187,15 +211,9 @@
 
     accountButton.addEventListener('click', () => {
       if (getUser()) {
-        supabaseClient.auth.signOut().then(({ error }) => {
-          if (error) {
-            setMessage(cartMessage, 'Não foi possível sair da conta.', 'error');
-            return;
-          }
-          currentUser = null;
-          updateAccountButton(null);
-          setMessage(cartMessage, 'Você saiu da sua conta.');
-        });
+        renderProfileAvatar(currentUser);
+        renderProfileView('profile');
+        openModal(profileModal);
         return;
       }
       setAuthMode('login');
@@ -219,6 +237,22 @@
 
     document.querySelectorAll('.auth-tab').forEach(tab => {
       tab.addEventListener('click', () => setAuthMode(tab.dataset.authMode));
+    });
+
+    document.querySelectorAll('[data-profile-view]').forEach(button => {
+      button.addEventListener('click', () => renderProfileView(button.dataset.profileView));
+    });
+
+    profileLogout.addEventListener('click', async () => {
+      const { error } = await supabaseClient.auth.signOut();
+      if (error) {
+        setMessage(cartMessage, 'Não foi possível sair da conta.', 'error');
+        return;
+      }
+      currentUser = null;
+      updateAccountButton(null);
+      closeModal(profileModal);
+      setMessage(cartMessage, 'Você saiu da sua conta.');
     });
 
     googleButton.addEventListener('click', async () => {

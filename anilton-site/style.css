@@ -176,6 +176,7 @@
   .buy-button { padding: 8px 12px; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; }
   .buy-button:hover, .account-button:hover, .cart-button:hover { border-color: var(--orange); color: var(--orange); }
   .account-button { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; font-size: 0.8rem; }
+  .account-button { width: 40px; height: 40px; justify-content: center; padding: 4px; }
   .account-avatar { width: 22px; height: 22px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; background-color: var(--surface); background-position: center; background-size: cover; color: var(--muted); font-size: 0.9rem; line-height: 1; }
   .account-avatar.has-image { border-color: var(--cyan); color: transparent; }
   .cart-button { display: inline-flex; align-items: center; gap: 8px; padding: 8px 10px; font-size: 0.8rem; }
@@ -197,6 +198,16 @@
   .form-submit:hover { filter: brightness(1.08); }
   .google-submit { margin: 0 0 18px; background: transparent; border: 1px solid var(--line); color: var(--text); }
   .google-submit:hover { border-color: var(--cyan); color: var(--cyan); }
+  .profile-heading { display: flex; align-items: center; gap: 14px; padding-right: 24px; }
+  .profile-heading h2 { margin-bottom: 0; }
+  .profile-avatar { width: 52px; height: 52px; font-size: 1.2rem; flex: 0 0 auto; }
+  .profile-menu { display: flex; gap: 18px; margin: 24px 0 20px; border-bottom: 1px solid var(--line); }
+  .profile-menu-item { padding: 0 0 10px; border: 0; border-bottom: 2px solid transparent; background: transparent; color: var(--muted); cursor: pointer; font: inherit; }
+  .profile-menu-item.active { color: var(--text); border-bottom-color: var(--orange); }
+  .profile-view { min-height: 92px; color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
+  .profile-view strong { color: var(--text); display: block; margin-bottom: 4px; }
+  .profile-logout { width: 100%; margin-top: 20px; padding: 11px 16px; border: 1px solid #F87171; background: transparent; color: #F87171; cursor: pointer; font: inherit; font-weight: 700; }
+  .profile-logout:hover { background: #F87171; color: #0B1620; }
   .form-message { min-height: 20px; margin-top: 12px; color: var(--muted); font-size: 0.82rem; }
   .form-message.error { color: #F87171; }
   .form-message.success { color: var(--green); }
