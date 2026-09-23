@@ -1,6 +1,6 @@
 // Public Sanity read configuration. No write token belongs in the frontend.
 window.SANITY_CONFIG = {
-  projectId: 'COLE_AQUI_O_PROJECT_ID',
+  projectId: 's0ziic3c',
   dataset: 'production',
   apiVersion: '2025-01-01'
 };
