@@ -23,7 +23,7 @@ section { padding: 72px 48px; }
 .album-tag { position: absolute; top: 12px; left: 12px; color: #0B1620; font-size: 0.72rem; font-weight: 800; padding: 4px 10px; text-transform: uppercase; letter-spacing: 0.05em; border: 1px solid rgba(0,0,0,0.1); }
 .tag-corrida { background: var(--orange); } .tag-futebol { background: var(--cyan); } .tag-volei { background: var(--yellow); } .tag-turismo { background: var(--pink); } .tag-viagem { background: var(--teal); }
 .album-info { padding: 18px 18px 16px; }
-.album-info h3 { font-family: 'Nunito Sans', sans-serif; font-size: 1rem; font-weight: 800; text-transform: none; margin-bottom: 8px; line-height: 1.35; }
+.album-info h3 { font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 800; text-transform: none; margin-bottom: 8px; line-height: 1.35; }
 .album-loc { display: flex; align-items: center; gap: 6px; color: var(--muted); font-size: 0.82rem; margin-bottom: 4px; }
 .album-date, .empty-state { color: var(--muted); font-size: 0.82rem; }
 .empty-state { padding: 20px 0; display: none; }
@@ -38,7 +38,7 @@ section { padding: 72px 48px; }
 .about-text p { color: var(--muted); max-width: 520px; margin-bottom: 14px; text-transform: none; line-height: 1.75; }
 .about-stats { display: flex; gap: 30px; margin-top: 32px; flex-wrap: wrap; }
 .about-stats div { min-width: 140px; }
-.about-stats div strong { display: block; font-family: 'Bungee', sans-serif; font-size: clamp(1.5rem, 2vw, 2.1rem); }
+.about-stats div strong { display: block; font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.5rem, 2vw, 2.1rem); font-weight: 700; }
 .about-stats div:nth-child(1) strong { color: var(--orange); } .about-stats div:nth-child(2) strong { color: var(--cyan); } .about-stats div:nth-child(3) strong { color: var(--yellow); }
 .about-stats div span { color: var(--muted); font-size: 0.8rem; }
 .contact { background: var(--surface-strong); border: 1px solid var(--line); padding: 42px 36px; }
