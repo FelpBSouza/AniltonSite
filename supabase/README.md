@@ -21,6 +21,14 @@ where id = (
 
 Troque o e-mail pelo e-mail real da conta. Execute esse comando somente no SQL Editor do Supabase.
 
+## Painel de álbuns
+
+Depois de executar `schema.sql`, execute também `admin-panel.sql` no SQL Editor. Esse arquivo cria o bucket público de prévias com marca d'água e as políticas usadas pelo painel.
+
+Abra `admin.html` no endereço publicado do site para entrar no painel. Use o e-mail da conta promovida a `admin`. No painel, crie um álbum, selecione as fotos e marque a opção de publicar. A primeira foto vira a capa e o álbum passa a ser carregado pela página inicial.
+
+Os arquivos originais ficam no bucket privado `photo-originals`. As prévias reduzidas ficam no bucket `photo-previews`. O pagamento automático ainda precisa de uma integração com Mercado Pago ou Asaas e um webhook no servidor.
+
 ## Regras de segurança
 
 - Nunca coloque a chave `service_role` no frontend.

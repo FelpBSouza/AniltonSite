@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel de albuns — Anilton Batista</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Nunito+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin-site">
+<main class="admin-shell">
+  <header class="admin-header">
+    <div>
+      <p class="admin-kicker">Anilton Batista</p>
+      <h1>Painel de albuns</h1>
+      <p class="admin-subtitle">Crie, publique e organize suas coberturas sem programar.</p>
+    </div>
+    <div class="admin-header-actions">
+      <a href="index.html" class="admin-link">Ver site</a>
+      <button id="logoutButton" class="admin-button secondary" type="button" hidden>Sair</button>
+    </div>
+  </header>
+
+  <section id="loginPanel" class="admin-panel login-panel">
+    <p class="admin-kicker">Acesso restrito</p>
+    <h2>Entrar no painel</h2>
+    <form id="loginForm">
+      <label for="loginEmail">E-mail</label>
+      <input id="loginEmail" type="email" autocomplete="email" required>
+      <label for="loginPassword">Senha</label>
+      <input id="loginPassword" type="password" autocomplete="current-password" required>
+      <p id="loginMessage" class="admin-message" role="status"></p>
+      <button class="admin-button" type="submit">Entrar</button>
+    </form>
+  </section>
+
+  <section id="dashboard" hidden>
+    <div class="admin-grid">
+      <form id="albumForm" class="admin-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="admin-kicker">Novo conteudo</p>
+            <h2>Criar album</h2>
+          </div>
+          <span id="uploadStatus" class="status-badge">Rascunho</span>
+        </div>
+        <label for="albumTitle">Nome do album</label>
+        <input id="albumTitle" name="title" maxlength="160" required placeholder="Ex.: Treinao Setembro Amarelo">
+        <div class="form-row">
+          <div>
+            <label for="albumCategory">Categoria</label>
+            <select id="albumCategory" name="category" required>
+              <option value="corrida">Corrida</option>
+              <option value="futebol">Futebol</option>
+              <option value="volei">Volei</option>
+              <option value="turismo">Turismo</option>
+            </select>
+          </div>
+          <div>
+            <label for="albumDate">Data</label>
+            <input id="albumDate" name="eventDate" type="date">
+          </div>
+        </div>
+        <label for="albumLocation">Local</label>
+        <input id="albumLocation" name="location" maxlength="160" placeholder="Parnaiba, PI">
+        <label for="albumDescription">Descricao</label>
+        <textarea id="albumDescription" name="description" rows="4" placeholder="Conte um pouco sobre esta cobertura."></textarea>
+        <label for="photoPrice">Preco por foto (R$)</label>
+        <input id="photoPrice" name="price" type="number" min="0" step="0.01" value="29.90" required>
+        <label for="albumPhotos">Fotos do album</label>
+        <input id="albumPhotos" name="photos" type="file" accept="image/jpeg,image/png,image/webp" multiple required>
+        <p class="field-hint">A primeira foto sera usada como capa. As fotos originais ficam protegidas.</p>
+        <label class="checkbox-line"><input id="publishAlbum" name="published" type="checkbox"> Publicar no site imediatamente</label>
+        <p id="albumMessage" class="admin-message" role="status"></p>
+        <button class="admin-button" type="submit">Salvar album</button>
+      </form>
+
+      <section class="admin-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="admin-kicker">Conteudo publicado</p>
+            <h2>Seus albuns</h2>
+          </div>
+          <button id="refreshButton" class="admin-button icon-button" type="button" aria-label="Atualizar lista">Atualizar</button>
+        </div>
+        <div id="albumList" class="album-list">
+          <p class="admin-empty">Carregando albuns...</p>
+        </div>
+      </section>
+    </div>
+  </section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script type="module" src="scripts/admin.js"></script>
+</body>
+</html>

@@ -10,10 +10,10 @@ section { padding: 72px 48px; }
 .carousel-wrap { position: relative; }
 .album-grid { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 8px 2px 10px; scrollbar-width: none; }
 .album-grid::-webkit-scrollbar { display: none; }
-.album-card { background: rgba(25,39,34,0.94); border: 1px solid var(--line); overflow: hidden; cursor: pointer; transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease; flex: 0 0 clamp(240px, 26vw, 320px); scroll-snap-align: start; box-shadow: var(--shadow); }
+.album-card { background: rgba(48,60,81,0.94); border: 1px solid var(--line); overflow: hidden; cursor: pointer; transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease; flex: 0 0 clamp(240px, 26vw, 320px); scroll-snap-align: start; box-shadow: var(--shadow); }
 .album-card:hover { transform: translateY(-4px); border-color: rgba(0, 220, 217, 0.55); }
 .album-card.hidden { display: none; }
-.carousel-arrow { position: absolute; top: 40%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; background: rgba(25,39,34,0.88); border: 1px solid var(--line); color: var(--text); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.1rem; z-index: 3; box-shadow: var(--shadow); }
+.carousel-arrow { position: absolute; top: 40%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; background: rgba(48,60,81,0.9); border: 1px solid var(--line); color: var(--text); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.1rem; z-index: 3; box-shadow: var(--shadow); }
 .carousel-arrow:hover { border-color: var(--yellow); color: var(--yellow); }
 .carousel-prev { left: -18px; }
 .carousel-next { right: -18px; }
@@ -23,14 +23,14 @@ section { padding: 72px 48px; }
 .album-tag { position: absolute; top: 12px; left: 12px; color: #0B1620; font-size: 0.72rem; font-weight: 800; padding: 4px 10px; text-transform: uppercase; letter-spacing: 0.05em; border: 1px solid rgba(0,0,0,0.1); }
 .tag-corrida { background: var(--orange); } .tag-futebol { background: var(--cyan); } .tag-volei { background: var(--yellow); } .tag-turismo { background: var(--pink); } .tag-viagem { background: var(--teal); }
 .album-info { padding: 18px 18px 16px; }
-.album-info h3 { font-size: 1rem; font-weight: 700; text-transform: none; margin-bottom: 8px; line-height: 1.35; }
+.album-info h3 { font-family: 'Nunito Sans', sans-serif; font-size: 1rem; font-weight: 800; text-transform: none; margin-bottom: 8px; line-height: 1.35; }
 .album-loc { display: flex; align-items: center; gap: 6px; color: var(--muted); font-size: 0.82rem; margin-bottom: 4px; }
 .album-date, .empty-state { color: var(--muted); font-size: 0.82rem; }
 .empty-state { padding: 20px 0; display: none; }
 .empty-state.visible { display: block; }
 
 /* ABOUT AND CONTACT */
-.about { display: grid; grid-template-columns: 1fr 1.3fr; gap: 56px; align-items: center; background: rgba(25,39,34,0.92); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 0; overflow: hidden; }
+.about { display: grid; grid-template-columns: 1fr 1.3fr; gap: 56px; align-items: center; background: rgba(48,60,81,0.92); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 0; overflow: hidden; }
 .about-photo { aspect-ratio: 1/1; overflow: hidden; position: relative; }
 .about-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(200deg, rgba(0,220,217,0.25), transparent 50%, rgba(41,197,201,0.2)); }
 .about-text { padding: 72px 48px 72px 0; }
@@ -41,7 +41,7 @@ section { padding: 72px 48px; }
 .about-stats div strong { display: block; font-family: 'Bungee', sans-serif; font-size: clamp(1.5rem, 2vw, 2.1rem); }
 .about-stats div:nth-child(1) strong { color: var(--orange); } .about-stats div:nth-child(2) strong { color: var(--cyan); } .about-stats div:nth-child(3) strong { color: var(--yellow); }
 .about-stats div span { color: var(--muted); font-size: 0.8rem; }
-.contact { background: #00DCD9; border: 1px solid var(--line); padding: 42px 36px; }
+.contact { background: var(--surface-strong); border: 1px solid var(--line); padding: 42px 36px; }
 .contact h2 { font-size: clamp(2.2rem, 5vw, 3.6rem); max-width: 700px; margin-bottom: 32px; }
 .contact-links { display: flex; gap: 18px; flex-wrap: wrap; }
 .contact-links a { border: 1px solid var(--line); padding: 12px 22px; font-size: 0.95rem; transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease; }
